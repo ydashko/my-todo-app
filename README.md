@@ -1,6 +1,6 @@
 # Todo App
 
-A simple Todo app built with Next.js, Tailwind CSS, and JSONPlaceholder API.
+A Todo app built with Next.js, Tailwind CSS, and JSONPlaceholder API.
 
 ## Features
 - View a list of todos
@@ -16,7 +16,10 @@ A simple Todo app built with Next.js, Tailwind CSS, and JSONPlaceholder API.
 ## How to run
 
 ```bash
-git clone https://github.com/your-username/todo-app.git
+git clone https://github.com/ydashko/todo-app.git
 cd todo-app
 npm install
 npm run dev
+
+After the server starts, open your browser and go to:
+http://localhost:3000
