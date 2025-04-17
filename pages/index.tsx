@@ -25,6 +25,7 @@ export default function Home() {
       completed: false,
     };
     setTodos(prev => [...prev, newTodo]);
+    setNewTodo('');
   };
 
   const deleteTodo = (id: number) => {
