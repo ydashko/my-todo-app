@@ -11,25 +11,26 @@ export default function Home() {
   const [newTodo, setNewTodo] = useState('');
 
   useEffect(() => {
-    axios
-      .get('https://jsonplaceholder.typicode.com/todos?_limit=10')
-      .then((res) => setTodos(res.data));
+    const fetchTodos = async () => {
+      const res = await axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10');
+      setTodos(res.data);
+    };
+    fetchTodos();
   }, []);
 
-  const addTodo = async () => {
-    if (!newTodo.trim()) return;
-    const res = await axios.post('https://jsonplaceholder.typicode.com/todos', {
-      title: newTodo,
+  const addTodo = (title: string) => {
+    const newTodo = {
+      id: Date.now(),
+      title,
       completed: false,
-    });
-    setTodos((prev) => [...prev, { id: res.data.id, title: newTodo }]);
-    setNewTodo('');
+    };
+    setTodos(prev => [...prev, newTodo]);
   };
 
-  const deleteTodo = async (id: number) => {
-    await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
-    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  const deleteTodo = (id: number) => {
+    setTodos(prev => prev.filter(todo => todo.id !== id));
   };
+  
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
@@ -43,11 +44,11 @@ export default function Home() {
             placeholder="Add a new todo"
           />
           <button
-            onClick={addTodo}
-            className="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600 cursor-pointer"
-          >
-            Add
-          </button>
+  onClick={() => addTodo(newTodo)}
+  className="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600 cursor-pointer"
+>
+  Add
+</button>
         </div>
         <ul className="space-y-2">
           {todos.map((todo) => (
